@@ -1,0 +1,12 @@
+.m-container {
+    max-width: 72em;
+    margin: auto;
+}
+.pd-large {
+    padding-top: 3em !important;
+    padding-bottom: 3em !important;
+}
+.pd-huge {
+    padding-top: 5em !important;
+    padding-bottom: 5em !important;
+}
