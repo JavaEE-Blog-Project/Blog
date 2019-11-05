@@ -1,12 +1,12 @@
 package cn.myblog.service;
 
 import cn.myblog.model.dto.JournalDTO;
+import cn.myblog.model.entity.Journal;
 import cn.myblog.model.enums.JournalType;
 import cn.myblog.model.param.JournalParam;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.lang.NonNull;
-
-import java.util.List;
 
 public interface JournalService {
 
@@ -18,7 +18,7 @@ public interface JournalService {
      * @return a page of journal
      */
     @NonNull
-    List<JournalDTO> pageBy(@NonNull JournalType type, @NonNull Pageable pageable);
+    Page<Journal> pageBy(@NonNull JournalType type, @NonNull Pageable pageable);
 
     /**
      * Save the journal
@@ -28,4 +28,24 @@ public interface JournalService {
      */
     @NonNull
     JournalDTO saveBy(@NonNull JournalParam journalParam);
+
+
+    /**
+     * Updating an existed journal
+     *
+     * @param id           the id of the journal
+     * @param journalParam journal parameter
+     * @return JournalDTO
+     */
+    @NonNull
+    JournalDTO updateBy(@NonNull Integer id, @NonNull JournalParam journalParam);
+
+    /**
+     * Deleting an existed journal
+     *
+     * @param id the id of the journal
+     * @return JournalDTO
+     */
+    @NonNull
+    JournalDTO deleteBy(@NonNull Integer id);
 }
