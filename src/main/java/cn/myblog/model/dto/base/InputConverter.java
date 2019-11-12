@@ -11,6 +11,7 @@ public interface InputConverter<DOMAIN> {
      *
      * @return new domain with same value
      */
+    @NonNull
     default DOMAIN convertTo(@NonNull DOMAIN domain) {
         BeanUtils.copyProperties(this, domain);
         return domain;

@@ -29,7 +29,6 @@ public interface JournalService {
     @NonNull
     JournalDTO saveBy(@NonNull JournalParam journalParam);
 
-
     /**
      * Updating an existed journal
      *

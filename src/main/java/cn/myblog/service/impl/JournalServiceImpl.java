@@ -35,9 +35,9 @@ public class JournalServiceImpl implements JournalService {
     @Override
     public JournalDTO updateBy(Integer id, JournalParam journalParam) {
         Journal journal = journalRepository.findById(id).orElseThrow(() -> new BadRequestException("文章不存在"));
-        Journal updatedJournal = journalParam.convertTo(journal);
-        journalRepository.save(updatedJournal);
-        return new JournalDTO().convertFrom(updatedJournal);
+        Journal updated = journalParam.convertTo(journal);
+        journalRepository.save(updated);
+        return new JournalDTO().convertFrom(updated);
     }
 
     @Override

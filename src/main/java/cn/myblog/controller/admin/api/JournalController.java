@@ -26,7 +26,7 @@ public class JournalController {
     @GetMapping
     public Page<JournalDTO> pageBy(@PageableDefault(sort = "createTime",direction = DESC) Pageable pageable,
                                    JournalQuery journalQuery) {
-        return null; //TO-DO:
+        return null;
     }
 
     @PostMapping
