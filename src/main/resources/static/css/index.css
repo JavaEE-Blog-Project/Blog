@@ -1,3 +1,6 @@
+body {
+    background: url("/img/bg.png");
+}
 .m-container {
     max-width: 72em;
     margin: auto;

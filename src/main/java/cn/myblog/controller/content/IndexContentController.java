@@ -2,14 +2,14 @@ package cn.myblog.controller.content;
 
 import cn.myblog.model.enums.JournalType;
 import cn.myblog.service.JournalService;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import static org.springframework.data.domain.Sort.Direction.DESC;
 
 @Controller
 @RequestMapping("/")
@@ -22,8 +22,14 @@ public class IndexContentController {
     }
 
     @GetMapping
-    public String index(@PageableDefault(size = 8, sort = "createTime", direction = DESC) Pageable pageable,
-                        Model model) {
+    public String index(Model model) {
+        return this.index(model, 0);
+    }
+
+    @GetMapping("page/{page:\\d+}")
+    public String index(Model model,
+                        @PathVariable("page") Integer page) {
+        Pageable pageable = PageRequest.of(page, 5, Sort.by("createTime").descending());
         model.addAttribute("journals", journalService.pageBy(JournalType.PUBLIC, pageable));
         return "index";
     }

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/journals/{id}")
+@RequestMapping("/journals/{id:\\d+}")
 public class JournalContentController {
 
     private final JournalService journalService;
@@ -18,8 +18,8 @@ public class JournalContentController {
     }
 
     @GetMapping
-    public String journal(@PathVariable("id") Integer id,
-                          Model model) {
+    public String journal(Model model,
+                          @PathVariable("id") Integer id) {
         model.addAttribute("journal", journalService.fetchBy(id));
         return "journal";
     }
