@@ -11,9 +11,17 @@ import javax.validation.constraints.Size;
 @Data
 public class JournalParam implements InputConverter<Journal> {
 
-    @NotBlank(message = "博客内容不能为空")
-    @Size(max = 1023, message = "博客长度不能超过{max}")
+    @NotBlank(message = "标题不能为空")
+    @Size(max = 50, message = "标题长度不能超过{max}")
+    private String title;
+
+    @NotBlank(message = "内容不能为空")
+    @Size(max = 1023, message = "内容长度不能超过{max}")
     private String content;
+
+    @NotBlank(message = "首图地址不能为空")
+    @Size(max = 255, message = "地址长度不能超过{max}")
+    private String image;
 
     private JournalType journalType = JournalType.PUBLIC;
 }

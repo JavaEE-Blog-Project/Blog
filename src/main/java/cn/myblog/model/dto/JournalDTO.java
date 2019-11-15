@@ -12,7 +12,11 @@ public class JournalDTO implements OutputConverter<JournalDTO, Journal> {
 
     private Integer id;
 
+    private String title;
+
     private String content;
+
+    private String image;
 
     private Long likes;
 

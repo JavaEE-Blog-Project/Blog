@@ -13,7 +13,6 @@ import javax.validation.Valid;
 
 import static org.springframework.data.domain.Sort.Direction.DESC;
 
-
 @RestController
 @RequestMapping("/api/admin/journals")
 public class JournalController {
@@ -31,17 +30,17 @@ public class JournalController {
 
     @PostMapping
     public JournalDTO createBy(@RequestBody @Valid JournalParam journalParam) {
-        return null;
+        return journalService.saveBy(journalParam);
     }
 
     @PutMapping("{id:\\d+}")
     public JournalDTO updateBy(@PathVariable Integer id,
                                @RequestBody @Valid JournalParam journalParam) {
-        return null;
+        return journalService.updateBy(id, journalParam);
     }
 
     @DeleteMapping("{id:\\d+}")
     public JournalDTO deleteBy(@PathVariable Integer id) {
-        return null;
+        return journalService.deleteBy(id);
     }
 }

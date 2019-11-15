@@ -10,6 +10,17 @@ import org.springframework.lang.NonNull;
 
 public interface JournalService {
 
+
+    /**
+     * Fetch a journal by id
+     *
+     * @param id id
+     * @return Journal of non null
+     * @throws cn.myblog.exception.BadRequestException
+     */
+    @NonNull
+    Journal fetchBy(@NonNull Integer id);
+
     /**
      * Lists by type.
      *

@@ -14,6 +14,7 @@ import static org.springframework.data.domain.Sort.Direction.DESC;
 @Controller
 @RequestMapping("/")
 public class IndexContentController {
+
     private final JournalService journalService;
 
     public IndexContentController(JournalService journalService) {

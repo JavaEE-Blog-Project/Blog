@@ -25,60 +25,19 @@
                                 <h3 class="ui teal header">博客</h3>
                             </div>
                             <div class="right aligned column">
-                                共<h2 class="ui orange header" style="display: inline">14</h2>篇
+                                共<h2 class="ui orange header" style="display: inline"
+                                     th:text="${journals.totalElements}">14</h2>篇
                             </div>
                         </div>
                     </div>
 <!--                    文章内容-->
                     <div class="ui attached segment">
-                        <div class="ui vertical segment">
-                            <div class="ui grid">
-<!--                                文章标题-->
-                                <div class="eleven wide column">
-                                    <a href="#" class="ui header">你理解什么是真正的财富吗？</a>
-                                    <p>正确做好任何一件事情的前提是清晰、正确的理解目标。
-                                        而事实是，我们很多人很多时候根本没有对目标正确的定义，甚至根本从来就没有想过，
-                                        只是大家都那么做而已…...
-                                    </p>
-                                    <div class="ui grid">
-                                        <div class="eleven wide column">
-                                            <div class="ui horizontal link list">
-                                                <div class="item">
-                                                    <img src="https://unsplash.it/100/100?image=1005" alt="" class="ui avatar image">
-                                                    <div class="content">
-                                                        <a href="#" class="header">Lazyzzz</a>
-                                                    </div>
-                                                </div>
-                                                <div class="item">
-                                                    <i class="calendar icon"></i>
-                                                    2019-10-01
-                                                </div>
-                                                <div class="item">
-                                                    <i class="eye icon"></i>
-                                                    2345
-                                                </div>
-                                                <div class="item">
-                                                    <i class="heart icon"></i>
-                                                    666
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="five wide column">
-                                    <img src="https://unsplash.it/800/450?image=1005" alt="" class="ui rounded image">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ui vertical segment">
+                        <div class="ui vertical segment" th:each="journal : ${journals.content}">
                             <div class="ui grid">
                                 <!--                                文章标题-->
                                 <div class="eleven wide column">
-                                    <a href="#" class="ui header">你理解什么是真正的财富吗？</a>
-                                    <p>正确做好任何一件事情的前提是清晰、正确的理解目标。
-                                        而事实是，我们很多人很多时候根本没有对目标正确的定义，甚至根本从来就没有想过，
-                                        只是大家都那么做而已…...
-                                    </p>
+                                    <a class="ui header" href="#" th:text="${journal.title}"></a>
+                                    <p th:text="${journal.content}"></p>
                                     <div class="ui grid">
                                         <div class="eleven wide column">
                                             <div class="ui horizontal link list">
@@ -90,28 +49,27 @@
                                                 </div>
                                                 <div class="item">
                                                     <i class="calendar icon"></i>
-                                                    2019-10-01
-                                                </div>
-                                                <div class="item">
-                                                    <i class="eye icon"></i>
-                                                    2345
+                                                    [[${#dates.format(journal.createTime,'yyyy-MM-dd')}]]
                                                 </div>
                                                 <div class="item">
                                                     <i class="heart icon"></i>
-                                                    666
+                                                    [[${journal.likes}]]
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="five wide column">
-                                    <img src="https://unsplash.it/800/450?image=1005" alt="" class="ui rounded image">
+                                    <a target="_blank" th:href="@{/journals/{id}(id=${journal.id})}">
+                                        <img class="ui rounded image" th:src="@{${journal.image}}">
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-<!--                右侧导航栏-->
+
+                <!--                右侧导航栏-->
                 <div class="five wide column">
                     <div class="ui segments">
                         <div class="ui secondary segment">
@@ -143,6 +101,7 @@
                         <img alt="二维码" class="ui rounded image" th:src="@{/img/wechat.jpg}">
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

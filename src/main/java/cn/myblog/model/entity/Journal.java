@@ -18,8 +18,14 @@ public class Journal extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "title", columnDefinition = "varchar(50) not null")
+    private String title;
+
     @Column(name = "content", columnDefinition = "varchar(1023) not null")
     private String content;
+
+    @Column(name = "image", columnDefinition = "varchar(255) not null")
+    private String image;
 
     @Column(name = "likes", columnDefinition = "bigint default 0")
     private Long likes;

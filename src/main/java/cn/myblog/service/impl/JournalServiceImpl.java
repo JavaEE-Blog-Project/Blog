@@ -21,6 +21,11 @@ public class JournalServiceImpl implements JournalService {
     }
 
     @Override
+    public Journal fetchBy(Integer id) {
+        return journalRepository.findById(id).orElseThrow(() -> new BadRequestException("文章不存在"));
+    }
+
+    @Override
     public Page<Journal> pageBy(JournalType type, Pageable pageable) {
         return journalRepository.findAllByType(type, pageable);
     }
@@ -34,7 +39,7 @@ public class JournalServiceImpl implements JournalService {
 
     @Override
     public JournalDTO updateBy(Integer id, JournalParam journalParam) {
-        Journal journal = journalRepository.findById(id).orElseThrow(() -> new BadRequestException("文章不存在"));
+        Journal journal = fetchBy(id);
         Journal updated = journalParam.convertTo(journal);
         journalRepository.save(updated);
         return new JournalDTO().convertFrom(updated);
@@ -42,7 +47,7 @@ public class JournalServiceImpl implements JournalService {
 
     @Override
     public JournalDTO deleteBy(Integer id) {
-        Journal journal = journalRepository.findById(id).orElseThrow(() -> new BadRequestException("文章不存在"));
+        Journal journal = fetchBy(id);
         journalRepository.delete(journal);
         return new JournalDTO().convertFrom(journal);
     }
