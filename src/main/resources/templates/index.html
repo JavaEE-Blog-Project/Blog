@@ -76,8 +76,12 @@
                                    th:unless="${journals.first}">上一页</a>
                             </div>
                             <div class="center aligned column">
-                                <h3 class="ui header" style="display: inline">[[${journals.number}+1]] /
-                                    [[${journals.totalPages}]]</h3>
+                                <span>共<h3 class="ui orange header" id="total" style="display: inline">[[${journals.totalPages}]]</h3>页，</span>
+                                <span>到第</span>
+                                <div class="ui input" style="width: 40px;height: 5px">
+                                    <input id="page" name="page" th:value="${journals.number+1}" type="text">
+                                </div>
+                                <span>页</span>
                             </div>
                             <div class="right aligned column">
                                 <a class="ui mini teal basic button" th:href="@{/page/{no}(no=${journals.number}+1)}"
@@ -129,5 +133,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+    <script src="/js/index.js"></script>
 </body>
 </html>

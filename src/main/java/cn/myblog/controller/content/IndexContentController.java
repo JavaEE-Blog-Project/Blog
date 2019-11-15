@@ -23,13 +23,13 @@ public class IndexContentController {
 
     @GetMapping
     public String index(Model model) {
-        return this.index(model, 0);
+        return this.index(model, 1);
     }
 
     @GetMapping("page/{page:\\d+}")
     public String index(Model model,
                         @PathVariable("page") Integer page) {
-        Pageable pageable = PageRequest.of(page, 5, Sort.by("createTime").descending());
+        Pageable pageable = PageRequest.of(page >= 1 ? page - 1 : page, 5, Sort.by("createTime").descending());
         model.addAttribute("journals", journalService.pageBy(JournalType.PUBLIC, pageable));
         return "index";
     }
