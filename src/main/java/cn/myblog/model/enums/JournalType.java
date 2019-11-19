@@ -2,9 +2,9 @@ package cn.myblog.model.enums;
 
 public enum JournalType implements ValueEnum<Integer>{
 
-    PUBLIC(1),
+    PUBLIC(0),
 
-    INTIMATE(0);
+    INTIMATE(1);
 
     private final int value;
 

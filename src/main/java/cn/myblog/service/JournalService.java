@@ -4,6 +4,7 @@ import cn.myblog.model.dto.JournalDTO;
 import cn.myblog.model.entity.Journal;
 import cn.myblog.model.enums.JournalType;
 import cn.myblog.model.param.JournalParam;
+import cn.myblog.model.param.JournalQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.lang.NonNull;
@@ -30,6 +31,16 @@ public interface JournalService {
      */
     @NonNull
     Page<Journal> pageBy(@NonNull JournalType type, @NonNull Pageable pageable);
+
+    /**
+     * List all the journal with similar title
+     *
+     * @param journalQuery must not be null
+     * @param pageable     must not be null
+     * @return pages of journal with similar title
+     */
+    @NonNull
+    Page<Journal> pageBy(@NonNull JournalQuery journalQuery, @NonNull Pageable pageable);
 
     /**
      * Save the journal

@@ -1,6 +1,7 @@
 package cn.myblog.controller.admin.api;
 
 import cn.myblog.model.dto.JournalDTO;
+import cn.myblog.model.entity.Journal;
 import cn.myblog.model.param.JournalParam;
 import cn.myblog.model.param.JournalQuery;
 import cn.myblog.service.JournalService;
@@ -23,9 +24,9 @@ public class JournalController {
     }
 
     @GetMapping
-    public Page<JournalDTO> pageBy(@PageableDefault(sort = "createTime",direction = DESC) Pageable pageable,
-                                   JournalQuery journalQuery) {
-        return null;
+    public Page<Journal> pageBy(@PageableDefault(sort = "createTime", direction = DESC) Pageable pageable,
+                                @RequestBody @Valid JournalQuery journalQuery) {
+        return journalService.pageBy(journalQuery, pageable);
     }
 
     @PostMapping
