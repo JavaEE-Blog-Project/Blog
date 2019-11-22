@@ -33,6 +33,10 @@ public class Journal extends BaseEntity {
     @Column(name = "type", columnDefinition = "int default 1")
     private JournalType type;
 
+//    @ManyToOne(targetEntity = Category.class)
+//    @JoinColumn(referencedColumnName = "id")
+//    private Category category;
+
     @Override
     protected void prePersist() {
         super.prePersist();

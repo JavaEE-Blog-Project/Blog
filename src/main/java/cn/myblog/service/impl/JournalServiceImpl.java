@@ -10,7 +10,9 @@ import cn.myblog.repository.JournalRepository;
 import cn.myblog.service.JournalService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -41,6 +43,7 @@ public class JournalServiceImpl implements JournalService {
     }
 
     @Override
+    @Cacheable(cacheNames = "journals", key = "#journalQuery")
     public Page<Journal> pageBy(JournalQuery journalQuery, Pageable pageable) {
         return journalRepository.findAll(buildSpecQuery(journalQuery), pageable);
     }
@@ -54,6 +57,8 @@ public class JournalServiceImpl implements JournalService {
     }
 
     @Override
+    @CachePut(cacheNames = "journal", key = "#id")
+    @CacheEvict(cacheNames = "journals", allEntries = true)
     public JournalDTO updateBy(Integer id, JournalParam journalParam) {
         Journal journal = fetchBy(id);
         Journal updated = journalParam.convertTo(journal);
@@ -62,6 +67,10 @@ public class JournalServiceImpl implements JournalService {
     }
 
     @Override
+    @Caching(evict = {
+            @CacheEvict(cacheNames = "journal", key = "#id"),
+            @CacheEvict(cacheNames = "journals", allEntries = true)
+    })
     public JournalDTO deleteBy(Integer id) {
         Journal journal = fetchBy(id);
         journalRepository.delete(journal);

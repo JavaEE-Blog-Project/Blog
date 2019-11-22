@@ -3,8 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <title>博客后台管理</title>
+
+    <link href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/layui.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
 </head>
 <body>
+<!--导航栏-->
+<nav th:replace="common/header"></nav>
 
+<!--中间-->
+<div class="pd-huge">
+    <div class="ui container">
+        <table class="layui-hide" id="journalTable" lay-filter="journalTable"></table>
+        <div class="ui center aligned teal segment">
+            <div class="ui horizontal linked list">
+                <div class="item">
+                    <label>关键词：</label>
+                    <div class="ui input">
+                        <input type="text">
+                    </div>
+                </div>
+                <div class="item">
+                    <label>文章状态：</label>
+                    <div class="ui selection dropdown">
+                        <input name="type" type="hidden">
+                        <i class="dropdown icon"></i>
+                        <div class="default text"></div>
+                        <div class="menu">
+                            <div class="item" data-value="0">公开</div>
+                            <div class="item" data-value="1">私密</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <button class="ui basic blue button">查询</button>
+                    <button class="ui basic red button">重置</button>
+                </div>
+                <div class="item">
+                    <button class="ui basic yellow button">
+                        <i class="pencil icon"></i>
+                        写文章
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="toolbar" type="text/html">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script th:src="@{/layui.js}"></script>
+<script th:src="@{/js/dashboard.js}"></script>
 </body>
 </html>

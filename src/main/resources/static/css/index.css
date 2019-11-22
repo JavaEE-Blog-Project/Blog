@@ -13,3 +13,8 @@ body {
     padding-top: 4em !important;
     padding-bottom: 4em !important;
 }
+
+.container-small {
+    max-width: 65em !important;
+    margin: auto !important;
+}

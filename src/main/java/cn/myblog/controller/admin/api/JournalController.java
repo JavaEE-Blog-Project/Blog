@@ -2,17 +2,15 @@ package cn.myblog.controller.admin.api;
 
 import cn.myblog.model.dto.JournalDTO;
 import cn.myblog.model.entity.Journal;
+import cn.myblog.model.enums.JournalType;
 import cn.myblog.model.param.JournalParam;
-import cn.myblog.model.param.JournalQuery;
 import cn.myblog.service.JournalService;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
-import static org.springframework.data.domain.Sort.Direction.DESC;
 
 @RestController
 @RequestMapping("/api/admin/journals")
@@ -24,10 +22,17 @@ public class JournalController {
     }
 
     @GetMapping
-    public Page<Journal> pageBy(@PageableDefault(sort = "createTime", direction = DESC) Pageable pageable,
-                                @RequestBody @Valid JournalQuery journalQuery) {
-        return journalService.pageBy(journalQuery, pageable);
+    public Page<Journal> pageBy(@RequestParam("page") Integer page,
+                                @RequestParam("limit") Integer limit) {
+        Pageable pageable = PageRequest.of(page >= 1 ? page - 1 : page, limit);
+        return journalService.pageBy(JournalType.PUBLIC, pageable);
     }
+
+//    @GetMapping
+//    public Page<Journal> pageBy(@PageableDefault(sort = "createTime", direction = DESC) Pageable pageable,
+//                                @RequestBody @Valid JournalQuery journalQuery) {
+//        return journalService.pageBy(journalQuery, pageable);
+//    }
 
     @PostMapping
     public JournalDTO createBy(@RequestBody @Valid JournalParam journalParam) {
