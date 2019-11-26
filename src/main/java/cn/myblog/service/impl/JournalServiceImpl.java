@@ -2,11 +2,13 @@ package cn.myblog.service.impl;
 
 import cn.myblog.exception.BadRequestException;
 import cn.myblog.model.dto.JournalDTO;
+import cn.myblog.model.entity.Category;
 import cn.myblog.model.entity.Journal;
 import cn.myblog.model.enums.JournalType;
 import cn.myblog.model.param.JournalParam;
 import cn.myblog.model.param.JournalQuery;
 import cn.myblog.repository.JournalRepository;
+import cn.myblog.service.CategoryService;
 import cn.myblog.service.JournalService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.cache.annotation.CacheEvict;
@@ -26,14 +28,23 @@ import javax.persistence.criteria.Predicate;
 public class JournalServiceImpl implements JournalService {
     private final JournalRepository journalRepository;
 
-    public JournalServiceImpl(JournalRepository journalRepository) {
+    private final CategoryService categoryService;
+
+    public JournalServiceImpl(JournalRepository journalRepository, CategoryService categoryService) {
         this.journalRepository = journalRepository;
+        this.categoryService = categoryService;
     }
 
     @Override
     @Cacheable(cacheNames = "journal", key = "#id")
     public Journal fetchBy(Integer id) {
         return journalRepository.findById(id).orElseThrow(() -> new BadRequestException("文章不存在"));
+    }
+
+    @Override
+    @Cacheable(cacheNames = "journals", key = "#pageable")
+    public Page<Journal> pageBy(Pageable pageable) {
+        return journalRepository.findAll(pageable);
     }
 
     @Override
@@ -51,6 +62,8 @@ public class JournalServiceImpl implements JournalService {
     @Override
     @CacheEvict(cacheNames = "journals", allEntries = true)
     public JournalDTO saveBy(JournalParam journalParam) {
+        Category category = categoryService.fetchOrGetDefaultBy(journalParam.getCategory().getId());
+        journalParam.setCategory(category);
         Journal journal = journalParam.convertTo(new Journal());
         journalRepository.save(journal);
         return new JournalDTO().convertFrom(journal);
@@ -61,6 +74,8 @@ public class JournalServiceImpl implements JournalService {
     @CacheEvict(cacheNames = "journals", allEntries = true)
     public JournalDTO updateBy(Integer id, JournalParam journalParam) {
         Journal journal = fetchBy(id);
+        Category category = categoryService.fetchOrGetDefaultBy(journalParam.getCategory().getId());
+        journalParam.setCategory(category);
         Journal updated = journalParam.convertTo(journal);
         journalRepository.save(updated);
         return new JournalDTO().convertFrom(updated);

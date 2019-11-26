@@ -1,10 +1,11 @@
 package cn.myblog.service;
 
+import cn.myblog.model.dto.UserDTO;
 import cn.myblog.model.entity.User;
+import cn.myblog.model.param.RegistryParam;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
@@ -78,4 +79,13 @@ public interface UserService {
      * @param user user of non null
      */
     void mustNotExpire(@NonNull User user);
+
+    /**
+     * Register a new user
+     *
+     * @param registryParam registry parameter
+     * @return UserDTO of non null
+     */
+    @NonNull
+    UserDTO register(@NonNull RegistryParam registryParam);
 }

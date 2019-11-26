@@ -14,11 +14,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
-/**
- * Controller advice for comment result.
- *
- * @author johnniang
- */
+
 @ControllerAdvice("cn.myblog.controller")
 public class CommonResultControllerAdvice implements ResponseBodyAdvice<Object> {
 

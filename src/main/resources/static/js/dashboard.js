@@ -13,7 +13,8 @@ layui.use('table', function () {
             [
                 {type: 'checkbox', fixed: 'left'}
                 , {field: 'title', title: '标题'}
-                , {field: 'likes', title: '点赞数', sort: true}
+                , {field: 'views', title: '访问', sort: true}
+                , {field: 'type', title: '类型', sort: true, templet: "<div>{{d.type === 'PUBLIC' ? '公开': '私密'}}</div>"}
                 , {
                 field: 'createTime',
                 title: '发布时间',
@@ -53,6 +54,5 @@ layui.use('table', function () {
                 layer.confirm('确认删除？');
                 break;
         }
-        ;
     });
 });

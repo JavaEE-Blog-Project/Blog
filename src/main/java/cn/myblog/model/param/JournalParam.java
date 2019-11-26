@@ -1,11 +1,13 @@
 package cn.myblog.model.param;
 
 import cn.myblog.model.dto.base.InputConverter;
+import cn.myblog.model.entity.Category;
 import cn.myblog.model.entity.Journal;
 import cn.myblog.model.enums.JournalType;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Data
@@ -23,5 +25,8 @@ public class JournalParam implements InputConverter<Journal> {
     @Size(max = 255, message = "地址长度不能超过{max}")
     private String image;
 
-    private JournalType journalType = JournalType.PUBLIC;
+    @NotNull
+    private Category category;
+
+    private JournalType type;
 }

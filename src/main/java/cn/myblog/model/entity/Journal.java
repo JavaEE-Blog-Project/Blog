@@ -1,17 +1,16 @@
 package cn.myblog.model.entity;
 
 import cn.myblog.model.enums.JournalType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 import javax.persistence.*;
 
 @Data
 @Entity
 @Table(name = "journals")
-@ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false, exclude = "category")
 public class Journal extends BaseEntity {
 
     @Id
@@ -27,15 +26,15 @@ public class Journal extends BaseEntity {
     @Column(name = "image", columnDefinition = "varchar(255) not null")
     private String image;
 
-    @Column(name = "likes", columnDefinition = "bigint default 0")
-    private Long likes;
+    @Column(name = "views", columnDefinition = "bigint default 0")
+    private Long views;
 
     @Column(name = "type", columnDefinition = "int default 1")
     private JournalType type;
 
-//    @ManyToOne(targetEntity = Category.class)
-//    @JoinColumn(referencedColumnName = "id")
-//    private Category category;
+    @JsonBackReference
+    @ManyToOne
+    private Category category;
 
     @Override
     protected void prePersist() {
@@ -43,8 +42,8 @@ public class Journal extends BaseEntity {
 
         id = null;
 
-        if (likes == null || likes < 0) {
-            likes = 0L;
+        if (views == null || views < 0) {
+            views = 0L;
         }
 
         if (type == null) {

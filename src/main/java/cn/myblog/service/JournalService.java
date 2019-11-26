@@ -23,6 +23,15 @@ public interface JournalService {
     Journal fetchBy(@NonNull Integer id);
 
     /**
+     * List all journals
+     *
+     * @param pageable pageable
+     * @return page of journals
+     */
+    @NonNull
+    Page<Journal> pageBy(@NonNull Pageable pageable);
+
+    /**
      * Lists by type.
      *
      * @param type journal type must not be null

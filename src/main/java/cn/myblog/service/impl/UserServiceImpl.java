@@ -3,11 +3,12 @@ package cn.myblog.service.impl;
 import cn.hutool.crypto.digest.BCrypt;
 import cn.myblog.exception.ForbiddenException;
 import cn.myblog.exception.NotFoundException;
+import cn.myblog.model.dto.UserDTO;
 import cn.myblog.model.entity.User;
+import cn.myblog.model.param.RegistryParam;
 import cn.myblog.repository.UserRepository;
 import cn.myblog.service.UserService;
 import cn.myblog.utils.DateUtils;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -52,7 +53,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean passwordMatch(User user, String plainPassword) {
         Assert.notNull(user, "User must not be null");
-        return user.getPassword().equals(plainPassword);
+        return BCrypt.checkpw(plainPassword, user.getPassword());
     }
 
     @Override
@@ -64,5 +65,13 @@ public class UserServiceImpl implements UserService {
             long seconds = TimeUnit.MILLISECONDS.toSeconds(user.getExpireTime().getTime() - now.getTime());
             throw new ForbiddenException("账号已被停用，请稍后重试").setErrorData(seconds);
         }
+    }
+
+    @Override
+    public UserDTO register(RegistryParam registryParam) {
+        registryParam.setPassword(BCrypt.hashpw(registryParam.getPassword()));
+        User user = registryParam.convertTo(new User());
+        userRepository.save(user);
+        return new UserDTO().convertFrom(user);
     }
 }

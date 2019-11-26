@@ -18,7 +18,7 @@ layui.use(['form','layer','jquery'], function () {
                 if (response.status === 200) {
                     var token = response.data
                     window.localStorage.setItem("token",token)
-                    window.location.href="http://localhost:8080"
+                    window.location.href = ""
                 }
 
                 if (response.status === 400) {

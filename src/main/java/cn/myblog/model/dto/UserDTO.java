@@ -14,4 +14,10 @@ public class UserDTO implements OutputConverter<UserDTO, User> {
     private String username;
 
     private String nickname;
+
+    private String email;
+
+    private String avatar;
+
+    private String description;
 }

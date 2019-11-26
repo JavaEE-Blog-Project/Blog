@@ -15,11 +15,6 @@ public class AdminContentController {
      */
     @GetMapping("/admin")
     public String admin(Model model) {
-//        Object user = model.getAttribute("user");
-//        if (user == null) {
-//            return "admin/login";
-//        }
-
         return "admin/dashboard";
     }
 }
