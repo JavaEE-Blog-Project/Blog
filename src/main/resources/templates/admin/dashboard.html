@@ -21,24 +21,25 @@
                 <div class="item">
                     <label>关键词：</label>
                     <div class="ui input">
-                        <input type="text">
+                        <input id="keyword" type="text">
                     </div>
                 </div>
                 <div class="item">
                     <label>文章类型：</label>
                     <div class="ui selection dropdown">
-                        <input name="type" type="hidden">
+                        <input id="type" type="hidden">
                         <i class="dropdown icon"></i>
                         <div class="default text"></div>
                         <div class="menu">
+                            <div class="item" data-value="">全部</div>
                             <div class="item" data-value="PUBLIC">公开</div>
                             <div class="item" data-value="INTIMATE">私密</div>
                         </div>
                     </div>
                 </div>
                 <div class="item">
-                    <button class="ui basic blue button">查询</button>
-                    <button class="ui basic red button">重置</button>
+                    <button class="ui basic blue button" id="searchTable">查询</button>
+                    <button class="ui basic red button" id="resetTable">重置</button>
                 </div>
                 <div class="item">
                     <button class="ui basic yellow button">

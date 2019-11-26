@@ -1,9 +1,13 @@
 $(".ui.dropdown").dropdown();
 
+$("#resetTable").click(function () {
+    $('#keyword').val("");
+})
+
 layui.use('table', function () {
     let table = layui.table;
 
-    table.render({
+    let tableIns = table.render({
         elem: '#journalTable'
         , url: '/api/admin/journals'
         , totalRow: true
@@ -13,8 +17,15 @@ layui.use('table', function () {
             [
                 {type: 'checkbox', fixed: 'left'}
                 , {field: 'title', title: '标题'}
-                , {field: 'views', title: '访问', sort: true}
-                , {field: 'type', title: '类型', sort: true, templet: "<div>{{d.type === 'PUBLIC' ? '公开': '私密'}}</div>"}
+                , {field: 'views', title: '访问', sort: true, width: 80}
+                , {
+                field: 'type',
+                title: '类型',
+                sort: true,
+                width: 80,
+                templet: "<div>{{d.type === 'PUBLIC' ? '公开': '私密'}}</div>"
+            }
+                , {field: 'category', title: '分类', sort: true, templet: "<div>{{d.category.name}}</div>"}
                 , {
                 field: 'createTime',
                 title: '发布时间',
@@ -55,4 +66,13 @@ layui.use('table', function () {
                 break;
         }
     });
+
+    $('#searchTable').click(function () {
+        let keyword = $('#keyword').val()
+            , type = $('#type').val()
+        tableIns.reload({
+            url: '/api/admin/journals/search'
+            , where: {'keyword': keyword, 'type': type}
+        })
+    })
 });

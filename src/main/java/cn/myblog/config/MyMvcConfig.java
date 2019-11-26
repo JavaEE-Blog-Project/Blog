@@ -12,5 +12,6 @@ public class MyMvcConfig implements WebMvcConfigurer {
 //        registry.addInterceptor(new LoginHandlerInterceptor())
 //                .addPathPatterns("/api/admin/**","/admin/**")
 //                .excludePathPatterns("/api/admin/login","/admin");
+//
     }
 }

@@ -1,6 +1,6 @@
 package cn.myblog.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -21,7 +21,7 @@ public class Category extends BaseEntity {
     @Column(name = "name", columnDefinition = "varchar(255) unique not null")
     private String name;
 
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "category")
     private Set<Journal> journalSet = new HashSet<>();
 

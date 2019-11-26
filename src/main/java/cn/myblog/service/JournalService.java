@@ -78,4 +78,11 @@ public interface JournalService {
      */
     @NonNull
     JournalDTO deleteBy(@NonNull Integer id);
+
+    /**
+     * Increase views by 1
+     *
+     * @param id id
+     */
+    void incrViewBy(@NonNull Integer id);
 }

@@ -2,7 +2,9 @@ package cn.myblog.controller.admin.api;
 
 import cn.myblog.model.dto.JournalDTO;
 import cn.myblog.model.entity.Journal;
+import cn.myblog.model.enums.JournalType;
 import cn.myblog.model.param.JournalParam;
+import cn.myblog.model.param.JournalQuery;
 import cn.myblog.service.JournalService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.data.domain.Page;
@@ -29,11 +31,18 @@ public class JournalController {
         return journalService.pageBy(pageable);
     }
 
-//    @GetMapping
-//    public Page<Journal> pageBy(@PageableDefault(sort = "createTime", direction = DESC) Pageable pageable,
-//                                @RequestBody @Valid JournalQuery journalQuery) {
-//        return journalService.pageBy(journalQuery, pageable);
-//    }
+    @GetMapping("/search")
+    @ApiOperation("get all the journals by journal query")
+    public Page<Journal> searchBy(@RequestParam("page") Integer page,
+                                  @RequestParam("limit") Integer limit,
+                                  @RequestParam("keyword") String keyword,
+                                  @RequestParam("type") JournalType type) {
+        Pageable pageable = PageRequest.of(page >= 1 ? page - 1 : page, limit);
+        JournalQuery journalQuery = new JournalQuery();
+        journalQuery.setKeyword(keyword);
+        journalQuery.setType(type);
+        return journalService.pageBy(journalQuery, pageable);
+    }
 
     @PostMapping
     @ApiOperation("create a journal by journal parameter")

@@ -1,7 +1,7 @@
 package cn.myblog.model.entity;
 
 import cn.myblog.model.enums.JournalType;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -32,7 +32,7 @@ public class Journal extends BaseEntity {
     @Column(name = "type", columnDefinition = "int default 1")
     private JournalType type;
 
-    @JsonBackReference
+    @JsonManagedReference
     @ManyToOne
     private Category category;
 

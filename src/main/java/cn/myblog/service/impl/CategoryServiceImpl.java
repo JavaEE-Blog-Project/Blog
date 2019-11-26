@@ -6,7 +6,6 @@ import cn.myblog.model.entity.Category;
 import cn.myblog.model.param.CategoryParam;
 import cn.myblog.repository.CategoryRepository;
 import cn.myblog.service.CategoryService;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -33,13 +32,13 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    @Cacheable(cacheNames = "categories", key = "#sort")
+//    @Cacheable(cacheNames = "categories", key = "#sort")
     public Page<Category> top10By(Sort sort) {
         return this.pageBy(PageRequest.of(0, 10, sort));
     }
 
     @Override
-    @Cacheable(cacheNames = "categories", key = "#pageable")
+//    @Cacheable(cacheNames = "categories", key = "#pageable")
     public Page<Category> pageBy(Pageable pageable) {
         return categoryRepository.findAll(pageable);
     }

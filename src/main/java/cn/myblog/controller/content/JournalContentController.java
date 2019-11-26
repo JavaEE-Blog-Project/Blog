@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * @author Lazyzzz
+ */
 @Controller
 @RequestMapping("/journals/{id:\\d+}")
 public class JournalContentController {
@@ -21,6 +24,7 @@ public class JournalContentController {
     public String journal(Model model,
                           @PathVariable("id") Integer id) {
         model.addAttribute("journal", journalService.fetchBy(id));
+        journalService.incrViewBy(id);
         return "journal";
     }
 }
