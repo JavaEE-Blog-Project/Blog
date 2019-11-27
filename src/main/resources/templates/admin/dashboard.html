@@ -4,51 +4,48 @@
     <meta charset="UTF-8">
     <title>博客后台管理</title>
 
-    <link href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
+    <!--    <link href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">-->
     <link rel="stylesheet" th:href="@{/css/layui.css}">
-    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
 </head>
 <body>
 <!--导航栏-->
-<nav th:replace="common/header"></nav>
+<div th:insert="/admin/common/header::adminHeader"></div>
 
 <!--中间-->
 <div class="pd-huge">
-    <div class="ui container">
-        <table class="layui-hide" id="journalTable" lay-filter="journalTable"></table>
-        <div class="ui center aligned teal segment">
-            <div class="ui horizontal linked list">
-                <div class="item">
-                    <label>关键词：</label>
-                    <div class="ui input">
-                        <input id="keyword" type="text">
-                    </div>
+    <div class="layui-container">
+        <form action="#" class="layui-form layui-form-pane">
+            <div class="layui-form-item">
+                <label class="layui-form-label">关键词</label>
+                <div class="layui-input-inline">
+                    <input autocomplete="off" class="layui-input" lay-verify="requried"
+                           name="keyword" placeholder="请输入关键词" type="text">
                 </div>
-                <div class="item">
-                    <label>文章类型：</label>
-                    <div class="ui selection dropdown">
-                        <input id="type" type="hidden">
-                        <i class="dropdown icon"></i>
-                        <div class="default text"></div>
-                        <div class="menu">
-                            <div class="item" data-value="">全部</div>
-                            <div class="item" data-value="PUBLIC">公开</div>
-                            <div class="item" data-value="INTIMATE">私密</div>
-                        </div>
-                    </div>
+                <label class="layui-form-label">文章类型</label>
+                <div class="layui-input-inline">
+                    <select name="type">
+                        <option value="">全部</option>
+                        <option value="PUBLIC">公开</option>
+                        <option value="INTIMATE">私密</option>
+                    </select>
                 </div>
-                <div class="item">
-                    <button class="ui basic blue button" id="searchTable">查询</button>
-                    <button class="ui basic red button" id="resetTable">重置</button>
+                <label class="layui-form-label">文章分类</label>
+                <div class="layui-input-inline">
+                    <select name="categoryId">
+                        <option value="">全部</option>
+                        <option th:each="category : ${categories}"
+                                th:text="${category.name}"
+                                th:value="${category.id}"></option>
+                    </select>
                 </div>
-                <div class="item">
-                    <button class="ui basic yellow button">
-                        <i class="pencil icon"></i>
-                        写文章
-                    </button>
+                <div class="layui-input-inline">
+                    <button class="layui-btn" lay-filter="query" lay-submit>查询</button>
+                    <button class="layui-btn layui-btn-primary" type="reset">重置</button>
                 </div>
             </div>
-        </div>
+        </form>
+        <table class="layui-hide" id="journalTable" lay-filter="journalTable" style="z-index: 1"></table>
     </div>
 </div>
 
@@ -59,8 +56,8 @@
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
 <script th:src="@{/layui.js}"></script>
+<script th:src="@{/js/admin.js}"></script>
 <script th:src="@{/js/dashboard.js}"></script>
 </body>
 </html>

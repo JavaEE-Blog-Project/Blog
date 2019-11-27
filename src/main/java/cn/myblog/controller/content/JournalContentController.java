@@ -24,7 +24,7 @@ public class JournalContentController {
     public String journal(Model model,
                           @PathVariable("id") Integer id) {
         model.addAttribute("journal", journalService.fetchBy(id));
-        journalService.incrViewBy(id);
+        journalService.incrVisitsBy(id);
         return "journal";
     }
 }

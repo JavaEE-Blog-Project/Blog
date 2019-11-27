@@ -10,6 +10,7 @@ import cn.myblog.model.param.JournalQuery;
 import cn.myblog.repository.JournalRepository;
 import cn.myblog.service.CategoryService;
 import cn.myblog.service.JournalService;
+import cn.myblog.utils.MarkdownUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -59,10 +60,17 @@ public class JournalServiceImpl implements JournalService {
     @Override
 //    @CacheEvict(cacheNames = "journals", allEntries = true)
     public JournalDTO saveBy(JournalParam journalParam) {
-        Category category = categoryService.fetchOrGetDefaultBy(journalParam.getCategory().getId());
-        journalParam.setCategory(category);
+        Category category = categoryService.fetchOrGetDefaultBy(journalParam.getCategoryId());
         Journal journal = journalParam.convertTo(new Journal());
+
+        String formatContent = MarkdownUtils.toHtml(journalParam.getOriginalContent());
+        String summary = StringUtils.substring(MarkdownUtils.cleanHtmlTag(formatContent), 0, 100);
+
+        journal.setFormatContent(formatContent);
+        journal.setSummary(summary);
+        journal.setCategory(category);
         journalRepository.save(journal);
+
         return new JournalDTO().convertFrom(journal);
     }
 
@@ -71,9 +79,9 @@ public class JournalServiceImpl implements JournalService {
 //    @CacheEvict(cacheNames = "journals", allEntries = true)
     public JournalDTO updateBy(Integer id, JournalParam journalParam) {
         Journal journal = fetchBy(id);
-        Category category = categoryService.fetchOrGetDefaultBy(journalParam.getCategory().getId());
-        journalParam.setCategory(category);
+        Category category = categoryService.fetchOrGetDefaultBy(journalParam.getCategoryId());
         Journal updated = journalParam.convertTo(journal);
+        updated.setCategory(category);
         journalRepository.save(updated);
         return new JournalDTO().convertFrom(updated);
     }
@@ -90,8 +98,8 @@ public class JournalServiceImpl implements JournalService {
     }
 
     @Override
-    public void incrViewBy(Integer id) {
-        journalRepository.incrViews(id);
+    public void incrVisitsBy(Integer id) {
+        journalRepository.incrVisits(id);
     }
 
     @NonNull
@@ -100,7 +108,6 @@ public class JournalServiceImpl implements JournalService {
             List<Predicate> predicates = new LinkedList<>();
 
             if (journalQuery.getKeyword() != null) {
-
                 String likeCondition = String.format("%%%s%%", StringUtils.strip(journalQuery.getKeyword()));
                 predicates.add(criteriaBuilder.like(root.get("title"), likeCondition));
             }

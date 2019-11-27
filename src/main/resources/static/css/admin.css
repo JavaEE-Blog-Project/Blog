@@ -1,0 +1,13 @@
+body {
+    background: url("/img/bg.png");
+}
+
+.layui-nav-item {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.pd-huge {
+    padding-top: 4em !important;
+    padding-bottom: 4em !important;
+}

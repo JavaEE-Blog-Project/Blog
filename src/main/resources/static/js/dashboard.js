@@ -1,11 +1,6 @@
-$(".ui.dropdown").dropdown();
-
-$("#resetTable").click(function () {
-    $('#keyword').val("");
-})
-
-layui.use('table', function () {
-    let table = layui.table;
+layui.use(['table', 'form'], function () {
+    let table = layui.table
+    form = layui.form;
 
     let tableIns = table.render({
         elem: '#journalTable'
@@ -17,7 +12,7 @@ layui.use('table', function () {
             [
                 {type: 'checkbox', fixed: 'left'}
                 , {field: 'title', title: '标题'}
-                , {field: 'views', title: '访问', sort: true, width: 80}
+                , {field: 'visits', title: '访问', sort: true, width: 80}
                 , {
                 field: 'type',
                 title: '类型',
@@ -62,17 +57,37 @@ layui.use('table', function () {
                 layer.msg('编辑');
                 break;
             case 'del':
-                layer.confirm('确认删除？');
+                layer.confirm('确认删除？', function (index) {
+                    $.ajax({
+                        url: '/api/admin/journals/' + data.id
+                        , type: 'DELETE'
+                        , data: {}
+                        , dateType: 'application/json'
+                        , success: function (response) {
+                            layer.msg("删除成功")
+                            tableIns.reload();
+                        }
+                        , error: function () {
+                            layer.msg("删除失败")
+                        }
+                    });
+                    layer.close(index);
+                });
                 break;
         }
     });
 
-    $('#searchTable').click(function () {
-        let keyword = $('#keyword').val()
-            , type = $('#type').val()
+    form.on('submit(query)', function (data) {
+        var field = data.field;
+
         tableIns.reload({
             url: '/api/admin/journals/search'
-            , where: {'keyword': keyword, 'type': type}
+            , where: {
+                'keyword': field['keyword']
+                , 'type': field['type']
+            }
         })
+
+        return false;
     })
 });

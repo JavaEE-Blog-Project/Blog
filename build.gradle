@@ -26,6 +26,7 @@ ext {
     hutoolVersion = '4.6.3'
     commonsLangVersion = '3.8.1'
     swaggerVersion = '2.9.2'
+    flexmarkVersion = '0.42.12'
 }
 
 dependencies {
@@ -39,6 +40,8 @@ dependencies {
     implementation "cn.hutool:hutool-extra:$hutoolVersion"
     implementation "io.springfox:springfox-swagger2:$swaggerVersion"
     implementation "io.springfox:springfox-swagger-ui:$swaggerVersion"
+    implementation "com.vladsch.flexmark:flexmark:$flexmarkVersion"
+    implementation "com.vladsch.flexmark:flexmark-html-parser:$flexmarkVersion"
 
     compileOnly 'org.projectlombok:lombok'
 

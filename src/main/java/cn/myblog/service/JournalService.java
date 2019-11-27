@@ -84,5 +84,5 @@ public interface JournalService {
      *
      * @param id id
      */
-    void incrViewBy(@NonNull Integer id);
+    void incrVisitsBy(@NonNull Integer id);
 }

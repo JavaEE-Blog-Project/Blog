@@ -35,6 +35,6 @@ public interface JournalRepository extends JpaRepository<Journal, Integer>, JpaS
     @NonNull
     @Transactional
     @Modifying(clearAutomatically = true)
-    @Query("update Journal j set j.views = j.views+1 where j.id = ?1")
-    void incrViews(@NonNull Integer id);
+    @Query("update Journal j set j.visits = j.visits+1 where j.id = ?1")
+    void incrVisits(@NonNull Integer id);
 }

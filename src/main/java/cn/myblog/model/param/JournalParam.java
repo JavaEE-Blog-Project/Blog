@@ -1,7 +1,6 @@
 package cn.myblog.model.param;
 
 import cn.myblog.model.dto.base.InputConverter;
-import cn.myblog.model.entity.Category;
 import cn.myblog.model.entity.Journal;
 import cn.myblog.model.enums.JournalType;
 import lombok.Data;
@@ -18,15 +17,15 @@ public class JournalParam implements InputConverter<Journal> {
     private String title;
 
     @NotBlank(message = "内容不能为空")
-    @Size(max = 1023, message = "内容长度不能超过{max}")
-    private String content;
+    private String originalContent;
 
     @NotBlank(message = "首图地址不能为空")
     @Size(max = 255, message = "地址长度不能超过{max}")
     private String image;
 
-    @NotNull
-    private Category category;
+    @NotNull(message = "分类不能为空")
+    private Integer categoryId;
 
+    @NotNull(message = "类型不能为空")
     private JournalType type;
 }

@@ -2,10 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Journal</title>
+    <title>[[${journal.title}]]</title>
 
     <link href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/journal.css}">
+    <!--    <link rel="stylesheet" th:href="@{/lib/prism/prism.css}">-->
+    <link rel="stylesheet" th:href="@{/css/typo.css}">
+    <!--    <link rel="stylesheet" th:href="@{/lib/tocbot/tocbot.css}">-->
 </head>
 <body>
 <!--导航栏-->
@@ -26,7 +29,7 @@
                 </div>
                 <div class="item">
                     <i class="eye icon"></i>
-                    [[${journal.views}]]
+                    [[${journal.visits}]]
                 </div>
             </div>
         </div>
@@ -37,7 +40,7 @@
         <!--内容-->
         <div class="ui attached segment pd-large">
             <h2 class="ui center aligned header">[[${journal.title}]]</h2>
-            <div class="pd-large-lr">[[${journal.content}]]</div>
+            <div class="pd-large-lr typo typo-selection" th:utext="${journal.formatContent}"></div>
 
             <!--点赞-->
             <div class="ui center aligned basic segment">
@@ -59,5 +62,7 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
 <script th:src="@{/js/header.js}"></script>
+<!--<script th:src="@{/lib/prism/prism.js}"></script>-->
+<!--<script th:src="@{/lib/tocbot/tocbot.min.js}"></script>-->
 </body>
 </html>

@@ -18,7 +18,7 @@ public class JournalDTO implements OutputConverter<JournalDTO, Journal> {
 
     private String image;
 
-    private Long likes;
+    private Long visits;
 
     private Date createTime;
 
