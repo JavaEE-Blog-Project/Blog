@@ -26,10 +26,10 @@ public class AdminContentController {
 
     @GetMapping
     public String admin(Model model, HttpSession session) {
-        Object token = session.getAttribute("token");
-        if (token == null) {
-            return "redirect:/admin/login";
-        }
+//        Object token = session.getAttribute("token");
+//        if (token == null) {
+//            return "redirect:/admin/login";
+//        }
         Sort sort = Sort.by("createTime").ascending();
         model.addAttribute("categories", categoryService.top10By(sort));
         return "admin/dashboard";
