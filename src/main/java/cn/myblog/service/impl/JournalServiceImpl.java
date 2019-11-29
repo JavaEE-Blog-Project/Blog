@@ -116,6 +116,11 @@ public class JournalServiceImpl implements JournalService {
                 predicates.add(criteriaBuilder.equal(root.get("type"), journalQuery.getType()));
             }
 
+            if (journalQuery.getCategoryId() != null) {
+                Category category = categoryService.fetchOrGetDefaultBy(journalQuery.getCategoryId());
+                predicates.add(criteriaBuilder.equal(root.get("category"), category));
+            }
+
             return query.where(predicates.toArray(new Predicate[0])).getRestriction();
         };
     }

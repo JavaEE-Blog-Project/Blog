@@ -1,10 +1,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <div style="text-align: center;z-index: 2" th:fragment="adminHeader">
     <ul class="layui-nav" lay-filter="adminHeader">
-        <li class="layui-nav-item">
-            <i class="layui-icon layui-icon-engine"></i>
-            <a href="/admin" style="display: inline">仪表盘</a>
-        </li>
+        <!--        <li class="layui-nav-item">-->
+        <!--            <i class="layui-icon layui-icon-engine"></i>-->
+        <!--            <a href="/admin" style="display: inline">仪表盘</a>-->
+        <!--        </li>-->
         <li class="layui-nav-item">
             <i class="layui-icon layui-icon-read"></i>
             <a href="#;" style="display: inline">文章</a>
@@ -14,10 +14,18 @@
             </dl>
         </li>
         <li class="layui-nav-item">
+            <i class="layui-icon layui-icon-note"></i>
+            <a href="#" style="display: inline">分类</a>
+            <dl class="layui-nav-child">
+                <dd><a href="/admin/category">分类管理</a></dd>
+            </dl>
+        </li>
+        <li class="layui-nav-item">
             <i class="layui-icon layui-icon-user"></i>
             <a href="javascript:;" style="display: inline">用户</a>
             <dl class="layui-nav-child">
-                <dd><a href="">个人资料</a></dd>
+                <dd><a href="#">个人资料</a></dd>
+                <dd><a href="#">注销</a></dd>
             </dl>
         </li>
     </ul>

@@ -36,11 +36,13 @@ public class JournalController {
     public Page<Journal> searchBy(@RequestParam("page") Integer page,
                                   @RequestParam("limit") Integer limit,
                                   @RequestParam("keyword") String keyword,
-                                  @RequestParam("type") JournalType type) {
+                                  @RequestParam("type") JournalType type,
+                                  @RequestParam("categoryId") Integer id) {
         Pageable pageable = PageRequest.of(page >= 1 ? page - 1 : page, limit);
         JournalQuery journalQuery = new JournalQuery();
         journalQuery.setKeyword(keyword);
         journalQuery.setType(type);
+        journalQuery.setCategoryId(id);
         return journalService.pageBy(journalQuery, pageable);
     }
 

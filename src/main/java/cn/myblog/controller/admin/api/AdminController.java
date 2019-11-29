@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @RestController
@@ -22,7 +23,10 @@ public class AdminController {
 
     @PostMapping("login")
     @ApiOperation("Authenticate an user")
-    public AuthToken auth(@RequestBody @Valid LoginParam loginParam) {
-        return adminService.authenticate(loginParam);
+    public AuthToken auth(@RequestBody @Valid LoginParam loginParam,
+                          HttpSession session) {
+        AuthToken token = adminService.authenticate(loginParam);
+        session.setAttribute("token", token);
+        return token;
     }
 }

@@ -34,7 +34,7 @@
                     <div class="ui attached segment">
                         <div class="ui vertical segment" th:each="journal : ${journals}">
                             <div class="ui grid">
-                                <!--                                文章标题-->
+                                <!--文章标题-->
                                 <div class="eleven wide column">
                                     <a class="ui header" th:href="@{/journals/{id}(id=${journal.id})}"
                                        th:text="${journal.title}"></a>

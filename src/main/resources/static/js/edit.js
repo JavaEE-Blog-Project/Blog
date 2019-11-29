@@ -14,7 +14,7 @@ layui.use('form', function () {
     form.render();
 
     form.on('submit(post)', function (data) {
-        var field = data.field;
+        let field = data.field;
 
         $.ajax({
             url: '/api/admin/journals'
@@ -39,6 +39,34 @@ layui.use('form', function () {
 
         return false;
     });
+
+    form.on('submit(edit-post)', function (data) {
+        let field = data.field;
+
+        //Get the id of the post
+        let id = window.location.pathname.split("/")[3];
+
+        $.ajax({
+            url: '/api/admin/journals/' + id
+            , type: 'PUT'
+            , data: JSON.stringify(field)
+            , dataType: 'text'
+            , contentType: 'application/json'
+            , success: function (response) {
+                response = JSON.parse(response)
+                if (response.status === 200) {
+                    layer.msg("修改成功")
+                } else {
+                    layer.msg("修改失败")
+                }
+            }
+            , error: function () {
+                layer.msg("修改失败")
+            }
+        });
+
+        return false;
+    })
 });
 
 // $('.ui.dropdown').dropdown({

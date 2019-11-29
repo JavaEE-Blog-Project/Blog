@@ -13,7 +13,7 @@ public class CookieUtils {
     }
 
     @NonNull
-    public static Cookie newInstance(@NonNull String name, @NonNull String value) {
+    public static Cookie of(@NonNull String name, @NonNull String value) {
         Cookie cookie = new Cookie(name, value);
         cookie.setPath("/");
         cookie.setMaxAge(EXPIRED_SECONDS);

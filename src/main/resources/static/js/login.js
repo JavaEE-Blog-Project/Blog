@@ -16,9 +16,7 @@ layui.use(['form','layer','jquery'], function () {
             ,success:function (response) {
                 response = JSON.parse(response)
                 if (response.status === 200) {
-                    var token = response.data
-                    window.localStorage.setItem("token",token)
-                    window.location.href = ""
+                    window.location.href = "/admin"
                 }
 
                 if (response.status === 400) {

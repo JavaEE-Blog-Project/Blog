@@ -12,7 +12,6 @@ import cn.myblog.utils.SecurityUtils;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 
 @Slf4j

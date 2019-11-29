@@ -13,5 +13,7 @@ public class JournalQuery {
     @NotBlank(message = "查询条件不能为空")
     private String keyword;
 
+    private Integer categoryId;
+
     private JournalType type;
 }
