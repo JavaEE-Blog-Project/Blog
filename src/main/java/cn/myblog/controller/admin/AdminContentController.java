@@ -2,14 +2,13 @@ package cn.myblog.controller.admin;
 
 import cn.myblog.service.CategoryService;
 import cn.myblog.service.JournalService;
+import cn.myblog.service.UserService;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/admin")
@@ -19,17 +18,23 @@ public class AdminContentController {
 
     private final JournalService journalService;
 
-    public AdminContentController(CategoryService categoryService, JournalService journalService) {
+    private final UserService userService;
+
+    public AdminContentController(CategoryService categoryService, JournalService journalService, UserService userService) {
         this.categoryService = categoryService;
         this.journalService = journalService;
+        this.userService = userService;
     }
 
     @GetMapping
-    public String admin(Model model, HttpSession session) {
+    public String admin(Model model) {
 //        Object token = session.getAttribute("token");
 //        if (token == null) {
 //            return "redirect:/admin/login";
 //        }
+        if (!userService.hasUser()) {
+            return "admin/install";
+        }
         Sort sort = Sort.by("createTime").ascending();
         model.addAttribute("categories", categoryService.top10By(sort));
         return "admin/dashboard";

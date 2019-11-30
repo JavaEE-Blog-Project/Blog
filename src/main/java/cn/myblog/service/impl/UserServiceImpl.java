@@ -26,8 +26,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> getCurrentUser() {
-        return Optional.empty();
+    public Boolean hasUser() {
+        return userRepository.count() != 0L;
     }
 
     @Override

@@ -21,10 +21,10 @@ public interface UserService {
     int LOCK_MINUTES = 10;
 
     /**
-     * Get current user.
+     * Check whether there's a user
      */
     @NonNull
-    Optional<User> getCurrentUser();
+    Boolean hasUser();
 
     /**
      * Get user by username
