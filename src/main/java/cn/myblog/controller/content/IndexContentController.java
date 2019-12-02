@@ -3,6 +3,7 @@ package cn.myblog.controller.content;
 import cn.myblog.model.enums.JournalType;
 import cn.myblog.service.CategoryService;
 import cn.myblog.service.JournalService;
+import cn.myblog.service.UserService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -23,9 +24,12 @@ public class IndexContentController {
 
     private final CategoryService categoryService;
 
-    public IndexContentController(JournalService journalService, CategoryService categoryService) {
+    private final UserService userService;
+
+    public IndexContentController(JournalService journalService, CategoryService categoryService, UserService userService) {
         this.journalService = journalService;
         this.categoryService = categoryService;
+        this.userService = userService;
     }
 
     @GetMapping
@@ -38,6 +42,7 @@ public class IndexContentController {
                         @PathVariable("page") Integer page) {
         Sort sort = Sort.by("createTime").descending();
         Pageable pageable = PageRequest.of(page >= 1 ? page - 1 : page, 5, sort);
+        model.addAttribute("user", userService.getCurrentUser());
         model.addAttribute("journals", journalService.pageBy(JournalType.PUBLIC, pageable));
         model.addAttribute("categories", categoryService.top10By(sort));
         return "index";

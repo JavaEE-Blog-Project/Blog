@@ -10,6 +10,7 @@ import cn.myblog.service.CategoryService;
 import cn.myblog.service.JournalService;
 import cn.myblog.service.UserService;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/admin/install")
 public class InstallController {
@@ -46,6 +48,8 @@ public class InstallController {
 
         //initialize the blog system
         init();
+
+        log.info("博客安装成功");
 
         return BaseResponse.ok("博客安装成功");
     }

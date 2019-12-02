@@ -27,6 +27,14 @@ public interface UserService {
     Boolean hasUser();
 
     /**
+     * Get information of host user
+     *
+     * @return User
+     */
+    @NonNull
+    User getCurrentUser();
+
+    /**
      * Get user by username
      *
      * @param username username must not be blank

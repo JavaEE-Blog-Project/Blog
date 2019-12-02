@@ -22,9 +22,11 @@ public class RegistryParam implements InputConverter<User> {
     @Size(max = 255, message = "密码长度不能超过 {max}")
     private String password;
 
-    private String email;
-
+    @NotBlank(message = "头像地址不能为空")
+    @Size(max = 255, message = "地址长度不能超过 {max}")
     private String avatar;
+
+    private String email;
 
     private String description;
 }

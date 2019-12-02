@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminContentController {
@@ -20,21 +22,25 @@ public class AdminContentController {
 
     private final UserService userService;
 
-    public AdminContentController(CategoryService categoryService, JournalService journalService, UserService userService) {
+    public AdminContentController(CategoryService categoryService,
+                                  JournalService journalService,
+                                  UserService userService) {
         this.categoryService = categoryService;
         this.journalService = journalService;
         this.userService = userService;
     }
 
     @GetMapping
-    public String admin(Model model) {
-//        Object token = session.getAttribute("token");
-//        if (token == null) {
-//            return "redirect:/admin/login";
-//        }
+    public String admin(Model model, HttpSession session) {
         if (!userService.hasUser()) {
             return "admin/install";
         }
+
+        Object token = session.getAttribute("token");
+        if (token == null) {
+            return "redirect:/admin/login";
+        }
+
         Sort sort = Sort.by("createTime").ascending();
         model.addAttribute("categories", categoryService.top10By(sort));
         return "admin/dashboard";

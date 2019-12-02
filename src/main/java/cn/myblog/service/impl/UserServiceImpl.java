@@ -1,6 +1,7 @@
 package cn.myblog.service.impl;
 
 import cn.hutool.crypto.digest.BCrypt;
+import cn.myblog.exception.BadRequestException;
 import cn.myblog.exception.ForbiddenException;
 import cn.myblog.exception.NotFoundException;
 import cn.myblog.model.dto.UserDTO;
@@ -9,6 +10,7 @@ import cn.myblog.model.param.RegistryParam;
 import cn.myblog.repository.UserRepository;
 import cn.myblog.service.UserService;
 import cn.myblog.utils.DateUtils;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -31,12 +33,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Cacheable(cacheNames = "user")
+    public User getCurrentUser() {
+        return userRepository.findById(1).orElseThrow(() -> new BadRequestException("请先初始化博客!"));
+    }
+
+    @Override
     public Optional<User> getByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
     @Override
-    public User getByUsernameOfNonNull(String username){
+    public User getByUsernameOfNonNull(String username) {
         return getByUsername(username).orElseThrow(() -> new NotFoundException("The username does not exist"));
     }
 

@@ -3,8 +3,10 @@ package cn.myblog.security.token;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class AuthToken {
+public class AuthToken implements Serializable {
 
     /**
      * Access token

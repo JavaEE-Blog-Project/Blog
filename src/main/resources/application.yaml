@@ -7,12 +7,12 @@ spring:
 
   h2:
     console:
-      enabled: true
+      enabled: false
 
   jpa:
     hibernate:
-      ddl-auto: create
-    show-sql: true
+      ddl-auto: update
+    show-sql: false
 
   thymeleaf:
-    cache: false
+    cache: true
