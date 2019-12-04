@@ -51,6 +51,11 @@ public class AdminContentController {
         return "admin/login";
     }
 
+    @GetMapping("/install")
+    public String install(){
+        return "admin/install";
+    }
+
     @GetMapping("/edit")
     public String edit(Model model) {
         Sort sort = Sort.by("createTime").ascending();
