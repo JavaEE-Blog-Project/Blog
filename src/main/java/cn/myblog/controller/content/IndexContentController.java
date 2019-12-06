@@ -26,7 +26,9 @@ public class IndexContentController {
 
     private final UserService userService;
 
-    public IndexContentController(JournalService journalService, CategoryService categoryService, UserService userService) {
+    public IndexContentController(JournalService journalService,
+                                  CategoryService categoryService,
+                                  UserService userService) {
         this.journalService = journalService;
         this.categoryService = categoryService;
         this.userService = userService;
