@@ -1,16 +1,21 @@
 package cn.myblog.model.entity;
 
 import cn.myblog.model.enums.JournalType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
 @Table(name = "journals")
-@EqualsAndHashCode(callSuper = false, exclude = "category")
+@EqualsAndHashCode(callSuper = false, exclude = {"category", "comments"})
+@ToString(exclude = {"category", "comments"})
 public class Journal extends BaseEntity {
 
     @Id
@@ -38,9 +43,13 @@ public class Journal extends BaseEntity {
     @Column(name = "type", columnDefinition = "int default 1")
     private JournalType type;
 
-    @JsonManagedReference
     @ManyToOne
+    @JsonManagedReference
     private Category category;
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "journal", cascade = {CascadeType.REMOVE})
+    private Set<Comment> comments = new HashSet<>();
 
     @Override
     protected void prePersist() {

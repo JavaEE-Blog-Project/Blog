@@ -52,6 +52,67 @@
         <div class="ui attached positive message">
             博客信息
         </div>
+
+        <div class="ui bottom attached segment">
+            <!--评论内容-->
+            <div class="ui teal segment" id="comment-container">
+                <div>
+                    <div class="ui threaded comments">
+                        <h3 class="ui dividing header">评论</h3>
+                        <th:block th:fragment="row(comments)">
+                            <div class="comment" th:each="comment : ${comments}">
+                                <a class="avatar" href="#">
+                                    <img src="https://unsplash.it/100/100?image=1005">
+                                </a>
+                                <div class="content">
+                                    <a class="author" href="#">
+                                        <span>[[${comment.nickname}]]</span>
+                                    </a>
+                                    <div class="metadata">
+                                        <span class="date"
+                                              th:text="${#dates.format(comment.createTime,'yyyy-MM-dd HH:mm')}"></span>
+                                    </div>
+                                    <div class="text" th:text="${comment.content}"></div>
+                                    <div class="actions">
+                                        <a class="reply" onclick="reply(this)" th:data-id="${comment.id}"
+                                           th:data-nickname="${comment.nickname}">回复</a>
+                                    </div>
+                                </div>
+                                <div class="comments" th:include="this::row(${comment.replyComments})"
+                                     th:unless="${#sets.isEmpty(comment.replyComments)}"></div>
+                            </div>
+                        </th:block>
+                    </div>
+                </div>
+            </div>
+            <!--评论表单-->
+            <div class="ui form" id="comment-form">
+                <input name="blogId" th:value="${journal.id}" type="hidden">
+                <input name="parentCommentId" type="hidden" value="-1">
+                <div class="field">
+                    <textarea name="content" placeholder="请输入评论内容*"></textarea>
+                </div>
+                <div class="fields">
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="user icon"></i>
+                            <input name="nickname" placeholder="姓名*" type="text">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="mail icon"></i>
+                            <input name="email" placeholder="邮箱*" type="text">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <button class="ui teal button" id="comment-submit" type="button">
+                            <i class="edit icon"></i>发布
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -60,8 +121,9 @@
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
+<!--<script th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>-->
 <script th:src="@{/js/header.js}"></script>
-<!--<script th:src="@{/lib/prism/prism.js}"></script>-->
-<!--<script th:src="@{/lib/tocbot/tocbot.min.js}"></script>-->
+<script th:src="@{/js/journal.js}"></script>
 </body>
 </html>

@@ -3,6 +3,7 @@ package cn.myblog.controller.content;
 import cn.myblog.model.enums.JournalType;
 import cn.myblog.model.param.JournalQuery;
 import cn.myblog.service.JournalService;
+import cn.myblog.service.UserService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -18,8 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class SearchContentController {
     private final JournalService journalService;
 
-    public SearchContentController(JournalService journalService) {
+    private final UserService userService;
+
+    public SearchContentController(JournalService journalService, UserService userService) {
         this.journalService = journalService;
+        this.userService = userService;
     }
 
     @GetMapping
@@ -36,7 +40,9 @@ public class SearchContentController {
         JournalQuery journalQuery = new JournalQuery();
         journalQuery.setKeyword(keyword);
         journalQuery.setType(JournalType.PUBLIC);
+
         model.addAttribute("results", journalService.pageBy(journalQuery, pageable));
+        model.addAttribute("user", userService.getCurrentUser());
         return "search";
     }
 }

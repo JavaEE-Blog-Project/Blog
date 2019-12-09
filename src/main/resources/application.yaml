@@ -11,8 +11,9 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
-    show-sql: false
+      ddl-auto: update
+    show-sql: true
+    open-in-view: true
 
   thymeleaf:
     cache: true

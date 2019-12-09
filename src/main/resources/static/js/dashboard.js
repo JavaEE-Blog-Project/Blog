@@ -1,6 +1,6 @@
 layui.use(['table', 'form'], function () {
     let table = layui.table
-    form = layui.form;
+        , form = layui.form;
 
     let tableIns = table.render({
         elem: '#journalTable'
@@ -44,7 +44,7 @@ layui.use(['table', 'form'], function () {
                 "data": res.data.content
             }
         }
-    })
+    });
 
     table.on('tool(journalTable)', function (obj) {
         let data = obj.data
@@ -78,7 +78,7 @@ layui.use(['table', 'form'], function () {
     });
 
     form.on('submit(query)', function (data) {
-        var field = data.field;
+        let field = data.field;
 
         tableIns.reload({
             url: '/api/admin/journals/search'
@@ -87,7 +87,7 @@ layui.use(['table', 'form'], function () {
                 , 'type': field['type']
                 , 'categoryId': field['categoryId']
             }
-        })
+        });
 
         return false;
     })

@@ -76,4 +76,9 @@ public class AdminContentController {
     public String category() {
         return "admin/category";
     }
+
+    @GetMapping("/comment")
+    public String comment() {
+        return "admin/comment";
+    }
 }
