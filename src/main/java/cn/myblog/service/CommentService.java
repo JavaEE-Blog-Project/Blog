@@ -5,6 +5,7 @@ import cn.myblog.model.param.CommentParam;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 
 /**
  * @Author Lazyzzz
@@ -21,6 +22,16 @@ public interface CommentService {
      */
     @NonNull
     public Page<Comment> pageBy(@NonNull Pageable pageable);
+
+    /**
+     * Fetch comment by keyword in page
+     *
+     * @param keyword  keyword (content, title)
+     * @param pageable pageable
+     * @return
+     */
+    @NonNull
+    public Page<Comment> searchBy(@Nullable String keyword, @NonNull Pageable pageable);
 
     /**
      * Save a comment by comment parameter

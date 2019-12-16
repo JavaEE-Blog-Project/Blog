@@ -32,6 +32,14 @@ public class CommentController {
         return commentService.pageBy(pageable);
     }
 
+    @GetMapping("/search")
+    public Page<Comment> searchBy(@RequestParam("page") Integer page,
+                                  @RequestParam("limit") Integer limit,
+                                  @RequestParam("keyword") String keyword) {
+        Pageable pageable = PageRequest.of(page >= 1 ? page - 1 : page, limit, Sort.by("createTime").descending());
+        return commentService.searchBy(keyword, pageable);
+    }
+
     @PostMapping
     public Comment saveBy(@RequestBody @Valid CommentParam commentParam) {
         return commentService.saveBy(commentParam);

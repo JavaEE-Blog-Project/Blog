@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+
+    <link href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+
+</head>
+<body>
+<!--导航栏-->
+<nav th:replace="common/header"></nav>
+
+<div class="pd-huge">
+    <div class="ui container">
+        <div class="ui top attached padded segment">
+            <h3 class="ui teal center aligned header">归档</h3>
+        </div>
+
+        <th:block th:each="item : ${items}">
+            <h3 class="ui center aligned header" th:text="${item.key}"></h3>
+            <div class="ui fluid vertical menu">
+                <a class="item" target="_blank" th:each="journal : ${item.value}"
+                   th:href="@{/journals/{id}(id=${journal.id})}">
+                        <span>
+                            <i class="mini teal circle icon"></i><span th:text="${journal.title}"></span>
+                            <div class="ui teal basic left pointing label m-padded-mini "
+                                 th:text="${#dates.format(journal.updateTime,'MMMdd')}"></div>
+                        </span>
+                    <div class="ui orange basic left pointing label m-padded-mini "
+                         th:text="${journal.category.name}"></div>
+                </a>
+            </div>
+        </th:block>
+    </div>
+</div>
+
+<!--底部栏-->
+<footer th:replace="common/footer"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script th:src="@{/js/header.js}"></script>
+</body>
+</html>

@@ -34,7 +34,7 @@ public class JournalContentController {
                           @PathVariable("id") Integer id) {
         Journal journal = journalService.fetchBy(id);
         Set<Comment> comments = journal.getComments().stream()
-                .filter(Comment -> Comment.getParentComment() == null)
+                .filter(comment -> comment.getParentComment() == null)
                 .collect(Collectors.toSet());
         model.addAttribute("journal", journal);
         model.addAttribute("comments", comments);

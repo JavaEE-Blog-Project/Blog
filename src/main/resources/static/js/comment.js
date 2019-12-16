@@ -48,4 +48,17 @@ layui.use(['table', 'form'], function () {
             layer.close(index);
         });
     });
+
+    form.on('submit(query)', function (data) {
+        let field = data.field;
+
+        tableIns.reload({
+            url: '/api/admin/comment/search'
+            , where: {
+                'keyword': field['keyword']
+            }
+        });
+
+        return false;
+    })
 });

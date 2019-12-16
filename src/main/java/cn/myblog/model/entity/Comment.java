@@ -29,8 +29,8 @@ public class Comment extends BaseEntity {
     @Column(name = "content", columnDefinition = "varchar(1027) not null")
     private String content;
 
-    @Column(name = "ip_address", columnDefinition = "varchar(127) default''")
-    private String ipAddress;
+    @Column(name = "email", columnDefinition = "varchar(255) not null")
+    private String email;
 
     @ManyToOne
     @JsonManagedReference
@@ -49,9 +49,5 @@ public class Comment extends BaseEntity {
         super.prePersist();
 
         id = null;
-
-        if (ipAddress == null) {
-            ipAddress = "";
-        }
     }
 }

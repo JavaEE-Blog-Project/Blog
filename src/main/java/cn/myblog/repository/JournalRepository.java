@@ -11,30 +11,25 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.lang.NonNull;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * @author Lazyzzz
  */
 public interface JournalRepository extends JpaRepository<Journal, Integer>, JpaSpecificationExecutor<Journal> {
 
-    /**
-     * Find all the journals by type with paging
-     *
-     * @param type     type
-     * @param pageable pageable
-     * @return Page<Journal>
-     */
     @NonNull
     Page<Journal> findAllByType(@NonNull JournalType type, @NonNull Pageable pageable);
 
-    /**
-     * Increase views by 1
-     *
-     * @param id id
-     * @return journal
-     */
     @NonNull
     @Transactional
     @Modifying(clearAutomatically = true)
     @Query("update Journal j set j.visits = j.visits+1 where j.id = ?1")
     void incrVisits(@NonNull Integer id);
+
+//    @Query("select function('date_format',j.updateTime,'%Y') as year from Journal j group by function('date_format',j.updateTime,'%Y') order by year desc")
+//    List<String> findGroupYear();
+
+    @Query("select j from Journal j where function('YEAR', j.updateTime, '%Y') = ?1")
+    List<Journal> findByYear(Integer year);
 }

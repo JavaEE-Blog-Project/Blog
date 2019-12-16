@@ -1,3 +1,33 @@
+tocbot.init({
+    // Where to render the table of contents.
+    tocSelector: '.js-toc',
+    // Where to grab the headings to build the table of contents.
+    contentSelector: '.js-toc-content',
+    // Which headings to grab inside of the contentSelector element.
+    headingSelector: 'h1, h2, h3'
+});
+
+$('.toc.button').popup({
+    popup: $('.toc-container.popup'),
+    on: 'click',
+    position: 'left center'
+});
+
+$('#toTop-button').click(function () {
+    $(window).scrollTo(0, 500);
+});
+
+let waypoint = new Waypoint({
+    element: document.getElementById('waypoint'),
+    handler: function (direction) {
+        if (direction == 'down') {
+            $('#toolbar').show(100);
+        } else {
+            $('#toolbar').hide(500);
+        }
+    }
+});
+
 $('.ui.form').form({
     fields: {
         title: {
@@ -48,6 +78,7 @@ $('#comment-submit').click(function () {
                 response = JSON.parse(response);
                 if (response.status === 200) {
                     alert("评论成功");
+                    window.location.reload();
                 } else {
                     alert("评论失败")
                 }

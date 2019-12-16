@@ -7,3 +7,19 @@
     padding-left: 3em !important;
     padding-right: 3em !important;
 }
+
+.m-fixed {
+    position: fixed !important;
+    z-index: 10 !important;
+}
+
+.m-right-bottom {
+    bottom: 0 !important;
+    right: 0 !important;
+}
+
+.m-padded {
+    padding: 1em !important;
+}
+
+/*.ui.popup{overflow:auto;}*/

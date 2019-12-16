@@ -6,4 +6,4 @@ $("#search").bind('keypress', function (event) {
         }
         window.location.href = "/search?keyword=" + val;
     }
-})
+});

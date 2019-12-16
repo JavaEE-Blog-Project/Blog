@@ -26,4 +26,10 @@ public class UserController {
     public UserDTO registry(@RequestBody @Valid RegistryParam registryParam) {
         return userService.register(registryParam);
     }
+
+//    @PutMapping
+//    @ApiOperation("更改用户信息")
+//    public UserDTO update(@RequestBody RegistryParam registryParam) {
+//
+//    }
 }

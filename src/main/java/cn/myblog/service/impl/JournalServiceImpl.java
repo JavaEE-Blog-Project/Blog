@@ -19,8 +19,10 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.Predicate;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -55,6 +57,13 @@ public class JournalServiceImpl implements JournalService {
 //    @Cacheable(cacheNames = "journals", key = "#journalQuery")
     public Page<Journal> pageBy(JournalQuery journalQuery, Pageable pageable) {
         return journalRepository.findAll(buildSpecQuery(journalQuery), pageable);
+    }
+
+    @Override
+    public Map<String, List<Journal>> groupByYear() {
+        Map<String, List<Journal>> map = new HashMap<>();
+        map.put("2019", journalRepository.findByYear(2019));
+        return map;
     }
 
     @Override
