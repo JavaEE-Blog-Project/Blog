@@ -81,4 +81,9 @@ public class AdminContentController {
     public String comment() {
         return "admin/comment";
     }
+
+    @GetMapping("/profile")
+    public String profile() {
+        return "admin/profile";
+    }
 }
