@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+
+    <link href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+
+</head>
+<body>
+<!--导航栏-->
+<nav th:replace="common/header"></nav>
+
+<div class="pd-huge">
+
+
+
+</div>
+<!--底部栏-->
+<footer th:replace="common/footer"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script th:src="@{/js/header.js}"></script>
+</body>
+</html>
