@@ -28,6 +28,12 @@ public interface CategoryService {
     @NonNull
     Category fetchOrGetDefaultBy(@NonNull Integer id);
 
+    /**
+     * List top 10 category by sort
+     *
+     * @param sort sort
+     * @return Page<Category>
+     */
     @NonNull
     Page<Category> top10By(@NonNull Sort sort);
 

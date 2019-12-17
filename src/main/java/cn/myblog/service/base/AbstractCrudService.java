@@ -44,16 +44,21 @@ public abstract class AbstractCrudService<DOMAIN,ID> implements CrudService<DOMA
 
     @Override
     public Optional<DOMAIN> fetchById(ID id) {
-        return Optional.empty();
+        return repository.findById(id);
     }
 
     @Override
     public DOMAIN getById(ID id) {
-        return null;
+        return repository.getOne(id);
     }
 
     @Override
     public boolean existsById(ID id) {
-        return false;
+        return repository.existsById(id);
+    }
+
+    @Override
+    public Long count() {
+        return repository.count();
     }
 }

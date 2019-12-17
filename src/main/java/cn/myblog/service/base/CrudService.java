@@ -48,8 +48,6 @@ public interface CrudService<DOMAIN,ID> {
     List<DOMAIN> listAllByIds(@Nullable Collection<ID> ids);
 
     /**
-     *
-     *
      * @param id id
      * @return optional
      */
@@ -71,4 +69,11 @@ public interface CrudService<DOMAIN,ID> {
      * @return boolean
      */
     boolean existsById(@NonNull ID id);
+
+    /**
+     * Count the numbers of elements
+     *
+     * @return count
+     */
+    Long count();
 }
