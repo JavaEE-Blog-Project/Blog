@@ -28,8 +28,6 @@
             </div>
         </div>
         <br>
-        <br>
-        <br>
         <!--Staff Module-->
         <div class="ui grid">
             <div class="eleven wide column" style="border-bottom: 2px solid grey; padding:0px;">
@@ -40,9 +38,9 @@
                 <br>
                 <table class="ui celled table">
                     <thead>
-                    <tr><th style="vertical-align:middle;padding-left:50px"><img style="height: 120px; width: 120px" src="http://img5.imgtn.bdimg.com/it/u=4094400000,3327666375&fm=26&gp=0.jpg"/></th>
-                        <th style="vertical-align:middle;padding-left:50px"><img style="height: 120px; width: 120px" src="http://file02.16sucai.com/d/file/2014/0829/372edfeb74c3119b666237bd4af92be5.jpg"/></th>
-                        <th style="vertical-align:middle;padding-left:50px"><img style="height: 120px; width: 120px" src="http://file02.16sucai.com/d/file/2015/0408/779334da99e40adb587d0ba715eca102.jpg"/></th>
+                    <tr><th style="vertical-align:middle;padding-left:70px"><img style="height: 120px; width: 120px" src="http://img5.imgtn.bdimg.com/it/u=4094400000,3327666375&fm=26&gp=0.jpg"/></th>
+                        <th style="vertical-align:middle;padding-left:70px"><img style="height: 120px; width: 120px" src="http://file02.16sucai.com/d/file/2014/0829/372edfeb74c3119b666237bd4af92be5.jpg"/></th>
+                        <th style="vertical-align:middle;padding-left:70px"><img style="height: 120px; width: 120px" src="http://file02.16sucai.com/d/file/2015/0408/779334da99e40adb587d0ba715eca102.jpg"/></th>
                     </tr></thead>
                     <tr>
                         <td style="text-align: center">Li Xia</td>
@@ -55,18 +53,38 @@
                         <td style="text-align: center">SWE1709227</td>
                     </tr>
                     <tr>
-                        <td style="text-align: center">Full Stack Engineer</td>
-                        <td style="text-align: center">Product Manager</td>
-                        <td style="text-align: center">Customer Service</td>
+                        <td style="text-align: center">全栈工程师</td>
+                        <td style="text-align: center">产品经理</td>
+                        <td style="text-align: center">客户服务</td>
                     </tr>
                 </table>
             </div>
-        </div>
-        <br>
-        <br>
+            <!--右侧导航栏-->
+                <div class="five wide column">
+                    <div class="ui segments">
+                        <div class="ui secondary segment">
+                            <div class="ui grid">
+                                    <h2><i class="paper plane icon"></i>目前我们的合作伙伴有：</h2>
+                            </div>
+                        </div>
+                        <div class="ui teal segment" style="font-weight:bold">
+                                <a href="https://www.apple.com/"><img style="height: 50px; width: 60px" src="/img/Apple.png" /></a> 苹果
+                                <a href="https://www.wechat.com/en/"><img style="height: 60px; width:60px" src="/img/wechat-png-wechat-png-512.png"/></a> 微信
+                                <a href="https://www.tencent.com/"><img style="height: 50px;height: 50px" src="/img/QQ.png"/></a>  腾讯QQ
+                                <a href="https://www.apple.com/safari/"><img style="height: 50px; height: 50px" src="/img/safari.png"/></a>  Safari浏览器
+                        </div>
+                    </div>
+                    <!--二维码-->
+                    <div class="ui horizontal divider header">扫码关注我</div>
+                    <div class="ui centered card" style="width: 11em">
+                        <img alt="二维码" class="ui rounded image" th:src="@{/img/wechat.jpg}">
+                    </div>
+                    <!--图片轮播-->
+
+                </div>
+
         <br>
         <!--Contact Us Module-->
-        <div class="ui grid">
             <div class="eleven wide column" style="padding: 0px; border-bottom: 2px solid grey">
                 <h1> 联系我们</h1>
             </div>
@@ -93,7 +111,6 @@
 </div>
 <!--底部栏-->
 <footer th:replace="common/footer"></footer>
-
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
 <script th:src="@{/js/header.js}"></script>
