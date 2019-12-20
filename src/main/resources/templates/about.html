@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Blog</title>
-
     <link href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/index.css}">
-
+    <link href="/css/about.css" rel="stylesheet"/>
 </head>
 <body>
 <!--导航栏-->
@@ -17,24 +16,24 @@
     <div class="ui container">
         <!--About Us Module-->
         <div class="ui grid">
-            <div class="eleven wide column" style="border-bottom: 2px solid grey; padding:0;">
-                <h1>关于我们</h1>
-            </div>
             <div class="eleven wide column" style="padding:0;">
-                如果您也对这个个人博客感兴趣的话，欢迎联系我们。
-                我们致力于您的工作效率，工作方式，以及个人展示。
-                <br>
-                商业合作，请联系：<a href="#">BusinessCooperation@163.com</a>
-            </div>
-        </div>
+                <div style="width:100%; border-bottom: 2px solid grey">
+                    <h1>关于我们</h1>
+                </div>
+                <div class="eleven wide column" style="padding:0;">
+                <h4>如果您也对这个个人博客感兴趣的话，欢迎联系我们。
+                我们致力于您的工作效率，工作方式，以及个人展示。</h4>
+                <h4>商业合作，请联系：<a href="#">BusinessCooperation@163.com</a></h4>
+                </div>
+        <br>
+        <br>
         <br>
         <!--Staff Module-->
-        <div class="ui grid">
             <div class="eleven wide column" style="border-bottom: 2px solid grey; padding:0px;">
                 <h1>加入我们</h1>
             </div>
             <div class="eleven wide column" style="padding:0px;">
-                目前团队人员：
+                <h4>目前团队人员：</h4>
                 <br>
                 <table class="ui celled table">
                     <thead>
@@ -59,29 +58,6 @@
                     </tr>
                 </table>
             </div>
-            <!--右侧导航栏-->
-                <div class="five wide column">
-                    <div class="ui segments">
-                        <div class="ui secondary segment">
-                            <div class="ui grid">
-                                    <h2><i class="paper plane icon"></i>目前我们的合作伙伴有：</h2>
-                            </div>
-                        </div>
-                        <div class="ui teal segment" style="font-weight:bold">
-                                <a href="https://www.apple.com/"><img style="height: 50px; width: 60px" src="/img/Apple.png" /></a> 苹果
-                                <a href="https://www.wechat.com/en/"><img style="height: 60px; width:60px" src="/img/wechat-png-wechat-png-512.png"/></a> 微信
-                                <a href="https://www.tencent.com/"><img style="height: 50px;height: 50px" src="/img/QQ.png"/></a>  腾讯QQ
-                                <a href="https://www.apple.com/safari/"><img style="height: 50px; height: 50px" src="/img/safari.png"/></a>  Safari浏览器
-                        </div>
-                    </div>
-                    <!--二维码-->
-                    <div class="ui horizontal divider header">扫码关注我</div>
-                    <div class="ui centered card" style="width: 11em">
-                        <img alt="二维码" class="ui rounded image" th:src="@{/img/wechat.jpg}">
-                    </div>
-                    <!--图片轮播-->
-
-                </div>
 
         <br>
         <!--Contact Us Module-->
@@ -106,8 +82,77 @@
                 </style>
             </div>
         </div>
-</div>
+            <div class="five wide column">
+                <div class="ui segments">
+                    <div class="ui secondary segment">
+                        <div class="ui grid">
+                            <h2><i class="paper plane icon"></i>目前我们的合作伙伴有：</h2>
+                        </div>
+                    </div>
+                    <div class="ui teal segment" style="font-weight:bold">
+                        <a href="https://www.wechat.com/en/"><img style="height: 60px; width:60px" src="/img/wechat-png-wechat-png-512.png"/></a> 微信
+                        <a href="https://www.tencent.com/"><img style="height: 50px;height: 50px" src="/img/QQ.png"/></a>  QQ
+                        <a href="https://www.apple.com/safari/"><img style="height: 50px; height: 50px" src="/img/safari.png"/></a>Safari
+                    </div>
+                </div>
+                <!--二维码-->
+                <div class="ui horizontal divider header">扫码关注我</div>
+                <div class="ui centered card" style="width: 11em">
+                    <img alt="二维码" class="ui rounded image" th:src="@{/img/wechat.jpg}">
+                </div>
+                <!--图片轮播-->
+                <div class="ui horizontal divider header">招商广告</div>
+                <div class="slideshow-container">
+                    <div class="mySlides fade">
+                        <div class="numbertext">1 / 3</div>
+                        <img src="https://d2wsh2n0xua73e.cloudfront.net/wp-content/uploads/2016/10/Apple-AAPL-Stock.jpg" style="width:100%">
+                        <div class="text"></div>
+                    </div>
 
+                    <div class="mySlides fade">
+                        <div class="numbertext">2 / 3</div>
+                        <img src="https://wallpaperaccess.com/full/755073.jpg" style="width:100%">
+                        <div class="text"></div>
+                    </div>
+
+                    <div class="mySlides fade">
+                        <div class="numbertext">3 / 3</div>
+                        <img src="https://media.idownloadblog.com/wp-content/uploads/2018/06/samsunglogo-1.jpg" style="width:100%">
+                        <div class="text"></div>
+                    </div>
+
+                </div>
+                <br>
+                <div style="text-align:center">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <script>
+                    var slideIndex = 0;
+                    showSlides();
+
+                    function showSlides() {
+                        var i;
+                        var slides = document.getElementsByClassName("mySlides");
+                        var dots = document.getElementsByClassName("dot");
+                        for (i = 0; i < slides.length; i++) {
+                            slides[i].style.display = "none";
+                        }
+                        slideIndex++;
+                        if (slideIndex > slides.length) {slideIndex = 1}
+                        for (i = 0; i < dots.length; i++) {
+                            dots[i].className = dots[i].className.replace(" active", "");
+                        }
+                        slides[slideIndex-1].style.display = "block";
+                        dots[slideIndex-1].className += " active";
+                        setTimeout(showSlides, 2000); // Change image every 2 seconds
+                    }
+                </script>
+
+            </div>
+        </div>
+    </div>
 </div>
 <!--底部栏-->
 <footer th:replace="common/footer"></footer>
